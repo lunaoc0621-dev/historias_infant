@@ -29,11 +29,11 @@ def encode_image_to_base64(image_path):
  
  
 # Streamlit 
-st.set_page_config(page_title='Tablero del Terror')
-st.title('🕯️ Tablero del Terror')
+st.set_page_config(page_title='Tablero Musical)
+st.title('🕯️ Tablero Musical')
 with st.sidebar:
     st.subheader("Acerca de:")
-    st.subheader("En esta aplicación veremos la capacidad que ahora tiene una máquina de interpretar un boceto y convertirlo en una historia de terror")
+    st.subheader("En esta aplicación veremos la capacidad que ahora tiene una máquina de interpretar un boceto y convertirlo en una canción")
 st.subheader("Dibuja el boceto en el panel y presiona el botón para analizarla")
  
 # Add canvas component
@@ -123,14 +123,14 @@ if canvas_result.image_data is not None and api_key and analyze_button:
 # Mostrar la funcionalidad de crear historia si ya se hizo el análisis
 if st.session_state.analysis_done:
     st.divider()
-    st.subheader("🦇 ¿Te atreves a crear una historia de terror?")
+    st.subheader(" ¿Te atreves a crear el nuevo hit mundial?")
     
-    if st.button("💀 Crear historia de terror"):
-        with st.spinner("Invocando la historia..."):
+    if st.button("Crear canción"):
+        with st.spinner("Creando el nuevo hit mundial..."):
             story_prompt = (
                 f"Basándote en esta descripción: '{st.session_state.full_response}', "
-                "escribe en español una historia de terror breve y escalofriante. "
-                "Debe tener una atmósfera oscura, suspenso creciente y un final inquietante."
+                "escribe en español la letra de una canción breve. "
+                "Debe ser coherente y rimar."
             )
             
             story_response = openai.chat.completions.create(
@@ -139,7 +139,7 @@ if st.session_state.analysis_done:
                 max_tokens=700,
             )
             
-            st.markdown("**👻 Tu historia de terror:**")
+            st.markdown("**Tu Top hit:**")
             st.write(story_response.choices[0].message.content)
  
 # Warnings for user action required
